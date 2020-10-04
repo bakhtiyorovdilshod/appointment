@@ -1,7 +1,6 @@
-django="3.1.1"
-psycopg2-binary
-djangorestframework = "3.11.1"
-authy
+Django==3.1.1
+djangorestframework==3.11.1
+psycopg2-binary==2.8.6
 phonenumbers
 python-dotenv
 twilio
