@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 from rest_framework.schemas import get_schema_view
 from rest_framework_swagger.views import get_swagger_view
 
@@ -27,6 +29,7 @@ urlpatterns = [
     path('api/v1/service/', include('service.urls')),
     path('api/v1/provider/', include('provider.urls')),
     path('api/v1/availability/', include('availability.urls')),
-    path('api/v1/customer/', include('customer.urls'))
+    path('api/v1/customer/', include('customer.urls')),
+    path('api/v1/appointment/', include('appointment.urls'))
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

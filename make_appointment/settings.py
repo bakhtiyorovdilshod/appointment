@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'availability',
     'service',
     'customer',
+    'appointment',
     'rest_framework_swagger',
 ]
 
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'middlewares.current_timezone.TimezoneMiddleware'
 ]
 
 ROOT_URLCONF = 'make_appointment.urls'
@@ -131,6 +133,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
@@ -146,3 +153,5 @@ ACCOUNT_SECURITY_API_KEY = 'Kkgsv0dNvQPgb2VIfKvZNms5hMwfEhC4'
 TWILIO_ACCOUNT_SID = 'AC0b3462a73b6d33fc6cc00a29cba5eb64'
 TWILIO_AUTH_TOKEN = 'e84c5afc7355a4635bf1b2be81128df5'
 TWILIO_VERIFICATION_SID = 'VA980eb787f70878dba95e468f8720cb9e'
+
+

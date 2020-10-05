@@ -22,7 +22,7 @@ class AvailabilitySerializer(serializers.Serializer):
 	begin = serializers.TimeField()
 	end = serializers.TimeField()
 	is_break = serializers.BooleanField(required=False)
-	service = serializers.PrimaryKeyRelatedField(queryset=Service.objects.all(), many=False, required=False)
+	is_working = serializers.BooleanField(required=False, default=True)
 	provider = serializers.PrimaryKeyRelatedField(queryset=Provider.objects.all(), many=False, required=False)
 
 
@@ -47,8 +47,37 @@ class AvailabilitySerializer(serializers.Serializer):
 		instance.day = validated_data.get('day', instance.day)
 		instance.begin = validated_data.get('begin', instance.begin)
 		instance.end = validated_data.get('end', instance.end)
-		instance.service = validated_data.get('service', instance.service)
 		instance.is_break = validated_data.get('is_break', instance.is_break)
 		instance.save()
 		return instance
+
+
+
+
+class UpdateWorkingDaySerializer(serializers.Serializer):
+	id=serializers.ReadOnlyField()
+	is_working = serializers.BooleanField(required=False, default=True)
+
+	def update(self, instance, validated_data):
+		instance.is_working = validated_data.get('is_working', instance.is_working)
+		instance.save()
+		return instance
+
+
+class AddBreakSerializer(serializers.Serializer):
+	id=serializers.ReadOnlyField()
+	begin = serializers.TimeField()
+	end = serializers.TimeField()
+
+	def update(self, instance, validated_data):
+		instance.begin = validated_data.get('begin', instance.begin)
+		instance.end = validated_data.get('end', instance.end)
+		instance.is_break = True
+		instance.save()
+		return instance
+
+
+
+
+
 

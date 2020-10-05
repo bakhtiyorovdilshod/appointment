@@ -17,8 +17,9 @@ class Availability(models.Model):
 	begin = models.TimeField(blank=True, null=True)
 	end = models.TimeField(blank=True, null=True)
 	is_break = models.BooleanField(default=False)
-	service = models.ForeignKey(Service, on_delete=models.CASCADE, blank=True, null=True)
+	is_working = models.BooleanField(default=True, blank=True, null=True)
 	provider = models.ForeignKey(Provider, on_delete=models.CASCADE, blank=True, null=True)
+	date = models.DateField(blank=True, null=True)
 	
 
 	def __str__(self):
